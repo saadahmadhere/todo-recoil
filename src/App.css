@@ -1,0 +1,17 @@
+.user-input {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.todo-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.unit-todo {
+	border: 1px solid gray;
+	border-radius: 5px;
+}
