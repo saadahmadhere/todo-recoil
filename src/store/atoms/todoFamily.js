@@ -26,6 +26,8 @@ export const todosAtomFamily = atomFamily({
 	default: selectorFamily({
 		key: 'todosSelectorFamily',
 		get: (id) => async () => {
+			// await new Promise((r) => setTimeout(r, 3000));
+			// throw new Error('bE failed');
 			const res = await axios.get(
 				`https://sum-server.100xdevs.com/todo?id=${id}`
 			);
