@@ -1,27 +1,26 @@
-import { useRecoilValue } from 'recoil';
-import {
-	notifications,
-	totalNotificationSelector,
-} from './store/atoms/homepageAtoms';
+import './App.css';
+import { RecoilRoot, useRecoilState } from 'recoil';
+import { todosAtomFamily } from './store/atoms/todoFamily';
 
 function App() {
-	const networkCount = useRecoilValue(notifications);
-	const totalNotificationCount = useRecoilValue(totalNotificationSelector);
+	return (
+		<RecoilRoot>
+			<Todo id={1} />
+			<Todo id={2} />
+			<Todo id={2} />
+			<Todo id={2} />
+		</RecoilRoot>
+	);
+}
 
-	console.log({ networkCount });
+function Todo({ id }) {
+	const [todo, setTodo] = useRecoilState(todosAtomFamily(id));
+
 	return (
 		<>
-			<button>Home</button>
-
-			<button>
-				My network (
-				{networkCount?.network >= 100 ? '99+' : networkCount?.network})
-			</button>
-			<button>Jobs {networkCount.jobs}</button>
-			<button>Messaging ({networkCount.messaging})</button>
-			<button>Notifications ({networkCount.notifications})</button>
-
-			<button>Me ({totalNotificationCount})</button>
+			{todo.title}
+			{todo.description}
+			<br />
 		</>
 	);
 }
