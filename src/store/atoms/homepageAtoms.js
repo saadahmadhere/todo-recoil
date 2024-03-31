@@ -1,30 +1,24 @@
 import { atom, selector } from 'recoil';
 
-export const notificationState = atom({
-	key: 'Notifications',
-	default: 145,
-});
-export const messageState = atom({
-	key: 'Message',
-	default: 75,
-});
-export const settingsState = atom({
-	key: 'Settings',
-	default: 49,
-});
-export const actionsState = atom({
-	key: 'Actions',
-	default: 15,
+export const notifications = atom({
+	key: 'networkAtom',
+	default: {
+		network: 4,
+		jobs: 6,
+		messaging: 3,
+		notifications: 3,
+	},
 });
 
 export const totalNotificationSelector = selector({
-	key: 'TotalNotificationSelector',
+	key: 'totalNotificationSelector',
 	get: ({ get }) => {
+		const allNotifications = get(notifications);
 		return (
-			get(notificationState) +
-			get(messageState) +
-			get(settingsState) +
-			get(actionsState)
+			allNotifications.network +
+			allNotifications.jobs +
+			allNotifications.notifications +
+			allNotifications.messaging
 		);
 	},
 });
