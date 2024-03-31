@@ -1,29 +1,21 @@
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import {
 	notifications,
 	totalNotificationSelector,
 } from './store/atoms/homepageAtoms';
-import { useEffect } from 'react';
-import axios from 'axios';
 
 function App() {
-	const [networkCount, setNetworkCount] = useRecoilState(notifications);
+	const networkCount = useRecoilValue(notifications);
 	const totalNotificationCount = useRecoilValue(totalNotificationSelector);
 
-	useEffect(() => {
-		// fetch
-		axios.get('https://sum-server.100xdevs.com/notifications').then((res) => {
-			setNetworkCount(res.data);
-		});
-	}, []);
-
+	console.log({ networkCount });
 	return (
 		<>
 			<button>Home</button>
 
 			<button>
-				My network ({networkCount.network >= 100 ? '99+' : networkCount.network}
-				)
+				My network (
+				{networkCount?.network >= 100 ? '99+' : networkCount?.network})
 			</button>
 			<button>Jobs {networkCount.jobs}</button>
 			<button>Messaging ({networkCount.messaging})</button>
