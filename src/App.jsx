@@ -1,33 +1,19 @@
 import { useState } from 'react';
 import './App.css';
+import useDebounce from './custom-hooks/useDebounce';
 
 function App() {
 	const [name, setName] = useState('');
-
-	// const handleDebounce = (val) => setName(val);
-
-	const debounce = (cb, timer) => {
-		let timerId;
-		return (arg) => {
-			clearTimeout(timerId);
-
-			timerId = setTimeout(() => {
-				cb(arg);
-			}, [timer]);
-		};
-	};
-
-	// const debounceChangeHandler = debounce(() => {}, 500)
+	const debouncedValue = useDebounce(name, 500);
 
 	return (
 		<div>
 			<input
 				type='text'
 				value={name}
-				// onChange={(e) => debounceChangeHandler(e.target.value)}
-				onChange={(e) => debounce((val) => setName(val), 500)(e.target.value)}
+				onChange={(e) => setName(e.target.value)}
 			/>
-			<h4>Name is {name}</h4>
+			<h4>Name is {debouncedValue}</h4>
 		</div>
 	);
 }
