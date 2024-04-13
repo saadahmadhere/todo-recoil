@@ -1,6 +1,7 @@
 import './App.css';
 import { RecoilRoot, useRecoilState, useRecoilValueLoadable } from 'recoil';
 import { todosAtomFamily } from './store/atoms/todoFamily';
+import useIsOnline from './custom-hooks/useIsOnline';
 
 function App() {
 	return (
@@ -15,6 +16,8 @@ function App() {
 
 function Todo({ id }) {
 	const todo = useRecoilValueLoadable(todosAtomFamily(id));
+	const { isUserOnline } = useIsOnline();
+	console.log(isUserOnline);
 
 	if (todo.state === 'loading') {
 		return <div>Loading...</div>;
