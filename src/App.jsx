@@ -7,7 +7,7 @@ function App() {
 
 	useInterval(() => {
 		setCount((c) => c + 1);
-	});
+	}, 1000);
 	return <div>count is {count}</div>;
 }
 

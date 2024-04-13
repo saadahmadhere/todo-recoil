@@ -6,7 +6,7 @@ const useInterval = (cb, n) => {
 			cb();
 		}, n);
 
-		return clearInterval(id);
+		return () => clearInterval(id);
 	}, [cb, n]);
 	return <div></div>;
 };
